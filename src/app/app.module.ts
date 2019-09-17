@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { TableModule } from 'primeng/table';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { QueryBuilderComponent } from './query-builder/query-builder.component';
@@ -9,8 +9,14 @@ import { QueryBuilderEditorComponent } from './query-builder-editor/query-builde
 import { QueryBuilderTesterComponent } from './query-builder-tester/query-builder-tester.component';
 import { Routes, RouterModule } from '@angular/router';
 import { MainToolbarComponent } from './main-toolbar/main-toolbar.component';
-import { ButtonModule } from 'primeng/primeng';
+import { ButtonModule, AutoCompleteModule } from 'primeng/primeng';
 import { DropdownModule } from 'primeng/dropdown';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+import { EditorModule } from 'primeng/editor';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { CardModule } from 'primeng/card';
 
 @NgModule({
   declarations: [
@@ -25,7 +31,14 @@ import { DropdownModule } from 'primeng/dropdown';
     AppRoutingModule,
     ToolbarModule,
     ButtonModule,
-    DropdownModule
+    DropdownModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    AutoCompleteModule,
+    FormsModule,
+    TableModule,
+    InputTextareaModule,
+    CardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

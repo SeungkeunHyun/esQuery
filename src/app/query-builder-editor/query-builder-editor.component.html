@@ -1,22 +1,60 @@
 <div class="ui-g ui-fluid">
   <div class="ui-g-12 ui-md-4">
     <div class="ui-inputgroup">
-      <span class="ui-inputgroup-addon"></span>
-      <input pInputText #esHost required type="url" name="esHost" ngModel [pattern]="https?://.+" [ngClass]="{'ng-invalid': esHost.touched && esHost.invalid}" placeholder="ES Host" (blur)="connectToES($event)">
+      <span class="ui-inputgroup-addon">ES Host</span>
+      <input pInputText class="ui-inputtext" required type="url" name="esHost" pattern="https?://.+" (blur)="connectToES($event)">
     </div>
   </div>
-  <!--//
   <div class="ui-g-12 ui-md-4">
     <div class="ui-inputgroup">
-      <span class="ui-inputgroup-addon"></span>
-      <p-dropdown [options]="indices" editable="true" [(ngModel)]="selectedIndex"></p-dropdown>
+      <span class="ui-inputgroup-addon">Indices</span>
+      <p-autoComplete [(ngModel)]="selectedIndex" [suggestions]="suggestions" (completeMethod)="pickIndices($event)" [dropdown]="true" (onSelect)="getDocuments($event)"></p-autoComplete>
     </div>
   </div>
-  //-->
   <div class="ui-g-12 ui-md-4">
     <div class="ui-inputgroup">
-      <span class="ui-inputgroup-addon">www</span>
-      <input type="text" pInputText placeholder="Website">
+      <span class="ui-inputgroup-addon">Documents</span>
+      <p-dropdown [(ngModel)]="selectedDoc" type="text" placeholder="Documents" [options]="documents" (onChange)="getDocument($event)"></p-dropdown>
     </div>
+  </div>
+  <div class="ui-g-12 ui-md-4">
+    <div class="ui-inputgroup">
+      <span class="ui-inputgroup-addon">Fields</span>
+      <p-dropdown [(ngModel)]="selectedField" type="text" placeholder="Fields" [options]="fields" (onChange)="getCounts($event)"></p-dropdown>
+      <br/>
+      <div *ngIf="document">
+        <p-card>
+          <p-header>
+            Document detail
+          </p-header>
+          {{document | json}}
+          <p-footer>
+            Footer content here
+          </p-footer>
+        </p-card>
+      </div>
+    </div>
+  </div>
+  <div class='ui-g-12 ui-md-4' *ngIf="countsPerValue != null">
+    <div class='ui-inputgroup'>
+      <span class="ui-inputgroup-addon">Counts</span>
+      <p-table [value]="countsPerValue">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Value</th>
+            <th>Count</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+          <tr>
+            <td>{{item.key}}</td>
+            <td>{{item.doc_count}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+  <div class='ui-g-12 ui-md-4'>
+    <textarea pInputTextarea [rows]="qryRows" [(ngModel)]="qryText"></textarea>
   </div>
 </div>
