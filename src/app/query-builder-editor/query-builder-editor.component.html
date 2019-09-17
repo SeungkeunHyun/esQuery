@@ -1,0 +1,22 @@
+<div class="ui-g ui-fluid">
+  <div class="ui-g-12 ui-md-4">
+    <div class="ui-inputgroup">
+      <span class="ui-inputgroup-addon"></span>
+      <input type="text" pInputText placeholder="ES Host">
+    </div>
+  </div>
+
+  <div class="ui-g-12 ui-md-4">
+    <div class="ui-inputgroup">
+      <span class="ui-inputgroup-addon"></span>
+      <p-dropdown [options]="indices" [(ngModel)]="selectedIndex"></p-dropdown>
+    </div>
+  </div>
+
+  <div class="ui-g-12 ui-md-4">
+    <div class="ui-inputgroup">
+      <span class="ui-inputgroup-addon">www</span>
+      <input type="text" pInputText placeholder="Website">
+    </div>
+  </div>
+</div>
