@@ -2,17 +2,17 @@
   <div class="ui-g-12 ui-md-4">
     <div class="ui-inputgroup">
       <span class="ui-inputgroup-addon"></span>
-      <input type="text" pInputText placeholder="ES Host">
+      <input pInputText #esHost required type="url" name="esHost" ngModel [pattern]="https?://.+" [ngClass]="{'ng-invalid': esHost.touched && esHost.invalid}" placeholder="ES Host" (blur)="connectToES($event)">
     </div>
   </div>
-
+  <!--//
   <div class="ui-g-12 ui-md-4">
     <div class="ui-inputgroup">
       <span class="ui-inputgroup-addon"></span>
-      <p-dropdown [options]="indices" [(ngModel)]="selectedIndex"></p-dropdown>
+      <p-dropdown [options]="indices" editable="true" [(ngModel)]="selectedIndex"></p-dropdown>
     </div>
   </div>
-
+  //-->
   <div class="ui-g-12 ui-md-4">
     <div class="ui-inputgroup">
       <span class="ui-inputgroup-addon">www</span>

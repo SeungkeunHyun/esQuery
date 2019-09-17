@@ -1,3 +1,4 @@
+import { ESServiceService } from './../esservice.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 export class QueryBuilderEditorComponent implements OnInit {
   indices: string[];
   selectedIndex: string;
-  constructor() { }
+  constructor(private esservice: ESServiceService) {
+    this.indices = [];
+  }
+
+  connectToES(e) {
+    console.log(e.target.value);
+  }
 
   ngOnInit() {
+
   }
 
 }
