@@ -152,6 +152,14 @@ export class QueryBuilderEditorComponent implements OnInit {
     return terms;
   }
 
+  removeTerm(term) {
+    this.searchTerms = this.searchTerms.filter(i => i !== term);
+  }
+
+  removeCalc(calc) {
+    this.calcFields = this.calcFields.filter(c => c !== calc);
+  }
+
   generateAggregations() {
     const num_aggs: string[] = ['max', 'min', 'sum', 'avg'];
     const date_aggs: string[] = ['max', 'min'];

@@ -41,7 +41,7 @@
     <p-orderList #terms [value]="searchTerms" header="Search Terms" (onSelectionChange)="dummy($event)">
       <ng-template let-fld pTemplate="term">
         <div class="ui-helper-clearfix">
-          <div>{{fld.name}} - {{fld.type}} - {{fld.value}}</div>
+          <div (dblclick)="removeTerm(fld)">{{fld.name}} - {{fld.type}} - {{fld.value}}</div>
         </div>
       </ng-template>
     </p-orderList>
@@ -56,7 +56,7 @@
     <p-orderList #terms [value]="calcFields" header="Calc Fields" (onSelectionChange)="dummy($event)">
       <ng-template let-cfld pTemplate="term">
         <div class="ui-helper-clearfix">
-          <div>{{cfld.name}} - {{cfld.type}} - {{cfld.value}}</div>
+          <div (dblclick)="removeCalc(cfld)">{{cfld.name}} - {{cfld.type}} - {{cfld.value}}</div>
         </div>
       </ng-template>
     </p-orderList>
