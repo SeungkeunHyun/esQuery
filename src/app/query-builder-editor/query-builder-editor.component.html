@@ -38,7 +38,7 @@
     <textarea pInputTextarea [rows]="10" [(ngModel)]="qryText"></textarea>
   </div>
   <div class='ui-g-12 ui-md-4'>
-    <p-orderList #terms [value]="searchTerms" header="Search Terms" (onSelectionChange)="dummy(event)">
+    <p-orderList #terms [value]="searchTerms" header="Search Terms" (onSelectionChange)="dummy($event)">
       <ng-template let-fld pTemplate="term">
         <div class="ui-helper-clearfix">
           <div>{{fld.name}} - {{fld.type}} - {{fld.value}}</div>
@@ -53,7 +53,7 @@
     </div>
   </div>
   <div class='ui-g-12 ui-md-4'>
-    <p-orderList #terms [value]="calcFields" header="Calc Fields" (onSelectionChange)="dummy(event)">
+    <p-orderList #terms [value]="calcFields" header="Calc Fields" (onSelectionChange)="dummy($event)">
       <ng-template let-cfld pTemplate="term">
         <div class="ui-helper-clearfix">
           <div>{{cfld.name}} - {{cfld.type}} - {{cfld.value}}</div>

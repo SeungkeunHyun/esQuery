@@ -9,13 +9,13 @@ import { ContextMenuModule, ContextMenu } from 'primeng/contextmenu';
   providers: [MessageService]
 })
 export class QueryBuilderEditorComponent implements OnInit {
-  @ViewChild('popupOptions') popupOptions: ContextMenu;
-  @ViewChild('fieldList') fieldList: ElementRef;
+  @ViewChild('popupOptions', null) popupOptions: ContextMenu;
+  @ViewChild('fieldList', null) fieldList: ElementRef;
   indices: any[];
   selectedIndex: string;
   selectedField: string;
   esHost: string;
-  selectedFieldObj: object;
+  selectedFieldObj: {type: string, name: string, value: string};
   esHosts: any[];
   documents: any[];
   selectedDoc: string;
@@ -30,7 +30,7 @@ export class QueryBuilderEditorComponent implements OnInit {
   calcOptions: MenuItem[];
   calcFields: any[];
   popCalcOptions: MenuItem[];
-  baseDate: object;
+  baseDate: any;
   searchTerms: any[];
   daysBefore: number;
   constructor(private esservice: ESServiceService, private messageService: MessageService) {
@@ -50,20 +50,6 @@ export class QueryBuilderEditorComponent implements OnInit {
       localStorage.setItem('esHosts', JSON.stringify(hosts));
     }
     this.esHosts = hosts;
-  }
-
-  getCounts(e) {
-    console.log(e, this.selectedIndex, this.selectedField);
-    this.selectedValue = this.document[this.selectedField.replace('.keyword', '')];
-    const qry = `${this.esHost}/${this.selectedIndex}/_search?size=0`
-    const param = {aggs: {count_per_value: {terms: {field: this.selectedField, size: 1000, order: {_count: 'desc'}}}}};
-    this.esservice.post(qry, param).subscribe(res => {
-      console.log(res);
-      this.countsPerValue = res === null ? null : res.aggregations.count_per_value.buckets;
-      this.qryText = JSON.stringify(param,null,2);
-      this.qryRows = this.qryText.split(/\n/).length;
-      console.log(this.countsPerValue);
-    });
   }
 
   connectToES(e) {
@@ -90,10 +76,11 @@ export class QueryBuilderEditorComponent implements OnInit {
   getDocument(e) {
     console.log(e);
     this.esservice.post(`${this.esHost}/${this.selectedIndex}/_search`, {query: {term: {_key: e.value}}}).subscribe(res => {
-      if(res == null || !res.hasOwnProperty('hits')) {
+      const data: any = res;
+      if(data == null || !data.hasOwnProperty('hits')) {
         return;
       }
-      this.document = res.hits.hits[0]._source;
+      this.document = data.hits.hits[0]._source;
       this.getFields(this.selectedIndex, this.document);
     });
   }
@@ -145,8 +132,8 @@ export class QueryBuilderEditorComponent implements OnInit {
 
   }
 
-  generateCalcs(p: object){
-    let terms: object = {query: {bool: {must: []}}};
+  generateCalcs(){
+    let terms: any = {query: {bool: {must: []}}};
     this.searchTerms.forEach(s => {
       let fname: string = s.name;
       if(s.type === 'text') {
