@@ -17,6 +17,10 @@ import { FormsModule } from '@angular/forms';
 import { EditorModule } from 'primeng/editor';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CardModule } from 'primeng/card';
+import { ToastModule } from 'primeng/toast';
+import { OrderListModule } from 'primeng/orderlist';
+import { ContextMenuModule } from 'primeng/contextmenu';
+import { MenuItem } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -38,7 +42,10 @@ import { CardModule } from 'primeng/card';
     FormsModule,
     TableModule,
     InputTextareaModule,
-    CardModule
+    CardModule,
+    ToastModule,
+    OrderListModule,
+    ContextMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
